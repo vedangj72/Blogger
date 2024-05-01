@@ -1,0 +1,9 @@
+1. The task is now the post form is working now make it only  without login 
+2. Now task is to relate the post to respective user 
+3. for that make 3 user make post using their id  and take consoles
+4. add the attribute of userId to the data 
+5. make all user visible on home and in personal make visible on the personal posts 
+
+
+Now to do 
+Adding the redux to the login page +

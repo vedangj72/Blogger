@@ -1,0 +1,48 @@
+/* Navigation.css */
+
+.navbar {
+    background-color: #006666;
+    /* Dark turquoise */
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #ffcc00;
+}
+
+.nav-link.active {
+    color: #ffcc00;
+}
+
+.content {
+    background-image: url('../../assets/MainBackground.jpg');
+    /* Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    min-height: calc(100vh - 50px);
+    /* Adjust based on your header height */
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center; */
+}
+
+
+/* Additional styling for image */
+
+.content img {
+    max-width: 100%;
+    max-height: 100%;
+}
