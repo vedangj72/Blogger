@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getPostId } from '../../appwrite/Database/DatabaseServices'
+import { getAllPosts, getPostId } from '../../appwrite/Database/DatabaseServices'
 import {useSelector} from 'react-redux'
 
 function GetDocs() {
@@ -8,7 +8,7 @@ function GetDocs() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const postId="662e674300125cad4ce1"
+                const postId="664219ea00278f1b48cd";
                 const posts = await getPostId(postId);
                 setData(posts);
             } catch (error) {
@@ -18,7 +18,7 @@ function GetDocs() {
 
         fetchData();
     }, []);
-    console.log(user);
+    console.log(data);
     return (
         <div>
             {/* Render your posts data here */}

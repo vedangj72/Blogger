@@ -1,41 +1,22 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import './Navigation.css';
+import HomeLogo from "../../assets/Icons/logo home.png";
+import PenLogo from "../../assets/Icons/pen logo.jpg";
+import SearchLogo from "../../assets/Icons/Search logo.png";
+import ProfileLogo from "../../assets/Icons/Profile logo.png";
+import Container from 'react-bootstrap/Container';
 import { useNavigate } from 'react-router-dom';
-import { logoutUser, getCurrentUser } from '../../appwrite/Auth/AuthBlogger';
-import { loggedOutSuccess } from '../../app/userSlice';
-import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../appwrite/Auth/AuthBlogger';
 
 function Navigation() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        // Check if the user is already logged in
-        const checkUserLoggedIn = async () => {
-            try {
-                const currentUser = await getCurrentUser();
-                if (!currentUser) {
-                    // User is not logged in, redirect to login page
-                    navigate('/login');
-                }
-            } catch (error) {
-                console.log(`Error checking user login status: ${error}`);
-            }
-        };
-
-        checkUserLoggedIn();
-    }, [navigate]);
 
     const handleLogout = async () => {
         try {
-            // const sessionId = 'current'; // Use 'current' as session ID to logout on this device
-            dispatch(loggedOutSuccess());
             await logoutUser();
-            // Dispatch loggedOutSuccess action
-            // Redirect to login page
             navigate('/login');
         } catch (error) {
             console.log(`Error in logging out: ${error}`);
@@ -45,23 +26,35 @@ function Navigation() {
     return (
         <div>
             <header>
-                <Nav className="navbar justify-content-center" activeKey="/home">
-                    <Nav.Item className="m-2">
-                        <Link to="/home" className="nav-link"><h4>Home</h4></Link>
-                    </Nav.Item>
-                    <Nav.Item className="m-2">
-                        <Link to="/blog" className="nav-link"><h4>Blog</h4></Link>
-                    </Nav.Item>
-                    <Nav.Item className="m-2">
-                        <NavDropdown title="Account" id="basic-nav-dropdown">
-                            <NavDropdown.Item as={Link} to="/account">Profile</NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav.Item>
-                </Nav>
+                <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
+                    <Container fluid>
+                        <Navbar.Brand>
+                            <Link to="/home">
+                                <img src={HomeLogo} alt="Home Logo" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                            </Link>
+                        </Navbar.Brand>
+                        <Navbar.Toggle aria-controls="navbar-nav" />
+                        <Navbar.Collapse id="navbar-nav">
+                            <Nav className="ms-auto align-items-center">
+                                <Nav.Item className="mx-2">
+                                    <Link to="/blog"><img src={PenLogo} alt="Blog" style={{ width: "50px", height: "50px", borderRadius: "50%" }} /></Link>
+                                </Nav.Item>
+                                <Nav.Item className="mx-2">
+                                    <Link to="/search"><img src={SearchLogo} alt="Search" style={{ width: "50px", height: "50px", borderRadius: "50%" }} /></Link>
+                                </Nav.Item>
+                                <Nav.Item className="mx-2">
+                                    <NavDropdown title={<img src={ProfileLogo} alt="Profile" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />} id="basic-nav-dropdown">
+                                        <NavDropdown.Item as={Link} to="/account">Profile</NavDropdown.Item>
+                                        <NavDropdown.Divider />
+                                        <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
+                                    </NavDropdown>
+                                </Nav.Item>
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Container>
+                </Navbar>
             </header>
-            <main className="content with-bg-img">
+            <main>
                 <Outlet />
             </main>
         </div>

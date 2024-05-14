@@ -14,16 +14,24 @@ import AddBlog from './components/Blog/AddBlog';
 // import { Account } from 'appwrite';
 import Profile from './components/Account/Profile';
 import Signup from './components/Forms/Signup';
+import UserComponent from './components/Home/GetTest';
+import Home from './components/Home/Home';
+import Search from './components/Search/Search';
+import ProfileId from './components/Account/ProfileId';
 // import { Component } from 'react';
 
 
 function App() {
   const router=createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Navigation/>}>
-      <Route path='/home' element={<Protected Component={GetDocs}/>}></Route>
-      <Route path='/blog' element={<Protected Component={AddBlog}/>}></Route>
-      <Route path='/account' element={<Protected Component={Profile}/>}></Route>
+      <Route path='/home' element={<Home/>}></Route>
+      <Route path='/blog' element={<AddBlog/>}></Route>
+      <Route path='/search' element={<Search/>}></Route>
+      <Route path='/account' element={<Profile/>}></Route>
+      <Route path='/profile/:id' element={<ProfileId/>}></Route>
       <Route path='/login' element={<LoginForm/>}></Route>
+      <Route path='/log' element={<UserComponent/>}></Route>
+      <Route path='/dog' element={<GetDocs/>}></Route>
       <Route path='/signup' element={<Signup/>}></Route>
     </Route>
   ))

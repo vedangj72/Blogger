@@ -59,24 +59,29 @@ async function logoutUser() {
         throw error; // Rethrow the error for the caller to handle
     }
 }
-
 // GET current user 
 // GET current user 
 async function getCurrentUser() {
     try {
-        const user = await account.get();
-        // console.log('Current User Data:', user);
-        return user;
+        const currentUser = await account.get(); // Get the current user
+        console.log('Current User Data:', currentUser); // Log the current user data
+        return currentUser; // Return the current user data
     } catch (error) {
-        if (error.code === 1007) {
-            console.error('User is missing required scope for account-related actions.');
-            // Handle this case, such as displaying an error message to the user
-        } else {
-            console.error('Error getting current user data:', error);
-            throw error; // Rethrow the error for the caller to handle
-        }
+        console.error('Error getting current user data:', error); // Log the error
+        throw error; // Rethrow the error for the caller to handle
     }
 }
+async function getAccountById(sessionId) {
+    try {
+        const session = await account.get(sessionId);
+        // console.log('Session Data:', session);
+        return session;
+    } catch (error) {
+        console.error('Error getting session by ID:', error);
+        throw error;
+    }
+}
+
 
 // Logout user
 
@@ -89,4 +94,4 @@ async function getCurrentUser() {
 // }
 
 
-export { signUpUser, loginUser, logoutUser, getCurrentUser };
+export { signUpUser, loginUser, logoutUser, getCurrentUser, getAccountById };
